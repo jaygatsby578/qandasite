@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="display-4 text-primary">Question & Answer</h1>
+
+<div class="jumbotron p-4 mb-4">
+  <h1 class="card-title">
+    <%= @question.title %>
+  </h1>
+  
+  <p class="card-text">
+    <%= @question.content %>
+  </p>
+
+  <h1 class="blockquote-footer text-right">
+    <%= @question.name %>
+  </h1>
+
+  <div class="<%= @question.finished ? 'text-danger' : 'text-primary' %>">
+    <%= @question.finished ? '終了' : '受付中' %>
+  </div>
+</div>
+
+
+<% if @question.finished? == false then %>
+  <div class="card p-3 mb-4">
+    <h3 class="h4 text-primary">※回答する</h3>
+    <%= render 'form2', answer: @answer %>
+  </div>
+<% end %>
+
+<h3 class="h4 text-primary">※これまで寄せられた回答</h3>
+
+<ul class="list-group">
+<% if @question.answer.count == 0 then %>
+  <p class="answer">※まだありません。</p>
+<% else %>
+  <% @question.answer.reverse_each do |re| %>
+    <li class="list-group-item">
+      <%= re.content + '(' + re.name + ')' %>
+    </li>
+  <% end %>
+<% end %>
+</ul>
+<p><a href="/questions/index.html.erb">トップページに戻る</a></p>
+

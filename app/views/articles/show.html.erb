@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="display-4 text-primary">注目記事とその感想</h1>
+
+<div class="jumbotron p-4 mb-4">
+  <h1 class="article-title">
+    <%= @article.title %>
+  </h1>
+
+  <p class="article-content">
+    <%= @article.content %>
+  </p>
+
+  <div class="<%= @question.fin ? 'text-danger' :'text-primary' %>">
+    <%= @article.fin ? '感想がいっぱいになりましたので意見の投稿を完了します。' : '記事に対する感想を受付中です。' %>
+  </div>
+</div>
+
+<% if @article.fin? == false then %>
+  <div>
+    <h3 class="h4 text-primary">※記事に対する感想を投稿する。</h3>
+    <%= render 'form2', comment: @comment %>
+  </div>
+<% end %>
+
+<h3 class="h4 text-primary">※これまで寄せられた感想</h3>
+
+<ul>
+<% if @article.comment.count == 0 then %>
+  <p class="comment">※まだ感想はありません。</p>
+<% else %>
+  <% @article.comment.reverse_each do |re| %>
+  <li class="list-group-item"><%= re.content + '(' + re.name + ')' %></li>
+  <% end %>
+<% end %>
+</ul>

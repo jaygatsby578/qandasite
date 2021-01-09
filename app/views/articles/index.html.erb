@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="display-4 text-primary">Articles</h1>
+
+<table class="table mt-5 mb-5">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Fin</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= article.content %></td>
+        <td><%= article.fin ? 'ご意見がいっぱいになったため投稿終了します' : 'ご意見投稿してください！' %></td>
+        <td><%= link_to 'Show', article %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新しい記事を投稿する', new_article_path %>
